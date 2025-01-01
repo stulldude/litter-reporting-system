@@ -1,50 +1,52 @@
-# React + TypeScript + Vite
+# 🗑️ Litter Reporting System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A cloud-based platform designed to help communities report, track, and remove litter efficiently. This project leverages AWS services and modern web technologies to make litter reporting simple and engaging.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+- **Photo Uploads:** Upload photos of litter securely to AWS S3.
+- **Litter Map:** View litter reports dynamically on an interactive map.
+- **User Authentication:** Log in using AWS Cognito or other OAuth providers.
+- **Leaderboards (Optional):** Gamify litter cleanup efforts with scoring.
+- **Real-Time Notifications:** Receive alerts for new reports via AWS SNS.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### **Frontend**
+- **Framework:** React (built with Vite for optimized development)
+- **Styling:** Material-UI
+- **TypeScript:** Strong typing for maintainability
+- **Map API:** Google Maps or Mapbox
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### **Backend**
+- **Serverless Framework:** AWS Lambda
+- **API Gateway:** RESTful endpoints for secure communication
+- **Database:** DynamoDB for scalable and efficient data storage
+- **Image Storage:** AWS S3 with presigned URLs for secure uploads
+- **Notifications:** AWS SNS for real-time alerts
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 📁 Project Structure
+
+```plaintext
+.
+├── frontend/
+│   ├── src/
+│   │   ├── components/        # Reusable UI components
+│   │   ├── pages/             # Individual pages (MapView, ReportForm)
+│   │   ├── services/          # API and Auth services
+│   │   ├── hooks/             # Custom React hooks (e.g., useAuth)
+│   │   ├── styles/            # Styling and Material-UI themes
+├── backend/
+│   ├── lambdas/               # AWS Lambda function code
+│   ├── api-gateway/           # API Gateway setup files
+│   ├── database/              # DynamoDB setup and schemas
+├── .env                       # Environment variables (ignored in Git)
+├── README.md                  # Project documentation
+
+

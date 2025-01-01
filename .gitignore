@@ -51,3 +51,7 @@ jest-test-results.json
 # Build artifacts
 .cache/
 build/
+
+# schemas and layer
+/schemas/
+/layer/
