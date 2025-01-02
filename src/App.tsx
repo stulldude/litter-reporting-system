@@ -7,6 +7,7 @@ import ErrorView from "./components/ErrorView";
 
 const App: React.FC = () => {
   const auth = useAuth();
+  
 
   if (auth.isLoading) {
     return <LoadingView />;
@@ -17,6 +18,7 @@ const App: React.FC = () => {
   }
 
   if (auth.isAuthenticated) {
+    
     return <AuthenticatedView auth={auth} />;
   }
 

@@ -7,4 +7,5 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom', // Enables browser-like testing environment
   },
+  
 });

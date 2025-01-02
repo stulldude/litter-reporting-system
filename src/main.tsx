@@ -5,11 +5,11 @@ import App from './App.tsx'
 import { AuthProvider } from "react-oidc-context";
 
 const cognitoAuthConfig = {
-  authority: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_em13GQMyK",
-  client_id: "2pl82c6cf0mrkr7ni1odtv2n0t",
-  redirect_uri: "https://d84l1y8p4kdic.cloudfront.net",
+  authority: "https://cognito-idp.us-west-2.amazonaws.com/us-west-2_1U63oGBMK",
+  client_id: "3oe70iatg9d02osgdl3741pj0v",
+  redirect_uri: "http://localhost:5175",
   response_type: "code",
-  scope: "email openid phone",
+  scope: "phone openid email",
 };
 
 

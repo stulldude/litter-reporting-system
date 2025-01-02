@@ -1,17 +1,18 @@
 import axios from 'axios';
+import LitterReport from '../types/LitterReport';
 
 const BASE_URL = 'https://kbpkol7wbc.execute-api.us-west-2.amazonaws.com/app_development';
 
-interface LitterReport {
-  recordId: number;
-  longitude?: number;
-  description?: string;
-  [key: string]: number | string | undefined; // For flexibility with additional properties
-}
 
-export const getLitterReports = async (): Promise<LitterReport[]> => {
+export const getLitterReports = async (auth): Promise<LitterReport[]> => {
   try {
-    const response = await axios.get<LitterReport[]>(`${BASE_URL}/litter`);
+    const response = await axios.get<LitterReport[]>(`${BASE_URL}/litter`, 
+      {
+        headers: {
+          'Authorization': `Bearer ${auth.user?.id_token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching litter reports:', error);
@@ -19,9 +20,14 @@ export const getLitterReports = async (): Promise<LitterReport[]> => {
   }
 };
 
-export const createLitterReport = async (reportData: LitterReport): Promise<LitterReport | null> => {
+export const createLitterReport = async (reportData: LitterReport, auth): Promise<LitterReport | null> => {
   try {
-    const response = await axios.post<LitterReport>(`${BASE_URL}/litter`, reportData);
+    const response = await axios.put<LitterReport>(`${BASE_URL}/litter`, reportData,
+      {
+        headers: {
+          'Authorization': `Bearer ${auth.user?.id_token}`,
+        },
+      });
     return response.data;
   } catch (error) {
     console.error('Error creating litter report:', error);
@@ -29,9 +35,15 @@ export const createLitterReport = async (reportData: LitterReport): Promise<Litt
   }
 };
 
-export const getLitterReport = async (reportId: number): Promise<LitterReport | null> => {
+export const getLitterReport = async (reportId: number, auth): Promise<LitterReport | null> => {
   try {
-    const response = await axios.get<LitterReport>(`${BASE_URL}/litter/${reportId}`);
+    const response = await axios.get<LitterReport>(`${BASE_URL}/litter/${reportId}`, 
+      {
+        headers: {
+          'Authorization': `Bearer ${auth.user?.id_token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching litter report:', error);
@@ -41,10 +53,17 @@ export const getLitterReport = async (reportId: number): Promise<LitterReport | 
 
 export const updateLitterReport = async (
   reportId: number,
-  reportData: LitterReport
+  reportData: LitterReport,
+  auth
 ): Promise<LitterReport | null> => {
   try {
-    const response = await axios.put<LitterReport>(`${BASE_URL}/litter/${reportId}`, reportData);
+    const response = await axios.put<LitterReport>(`${BASE_URL}/litter/${reportId}`, reportData, 
+      {
+        headers: {
+          'Authorization': `Bearer ${auth.user?.id_token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error updating litter report:', error);
@@ -52,9 +71,15 @@ export const updateLitterReport = async (
   }
 };
 
-export const deleteLitterReport = async (reportId: number): Promise<LitterReport | null> => {
+export const deleteLitterReport = async (reportId: number, auth): Promise<LitterReport | null> => {
   try {
-    const response = await axios.delete<LitterReport>(`${BASE_URL}/litter/${reportId}`);
+    const response = await axios.delete<LitterReport>(`${BASE_URL}/litter/${reportId}`, 
+      {
+        headers: {
+          'Authorization': `Bearer ${auth.user?.id_token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error deleting litter report:', error);
