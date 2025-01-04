@@ -38,11 +38,18 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.target;
     const reportData: LitterReport = handleReportData(new FormData(form));
-    console.log('Submitting report:', reportData);
-    const response = await createLitterReport(reportData, localAuth);
-    console.log('Response:', response);
-    console.log(localAuth.user?.access_token);
-    console.log(localAuth.user?.id_token);
+    try {
+        const call = await createLitterReport(reportData, localAuth);
+        console.log(call)
+        if (call != null && call.status === 200) {
+            console.log("Litter report created successfully!");
+        } else {
+            console.error("Failed to create litter report. Status code:", call);
+        }
+    } catch (error) {
+        console.error('Error creating litter report:', error);
+    }
+    form.reset();
 }
 
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import LitterReport from '../types/LitterReport';
+import CallResponse from '../types/CallResponse';
 
 const BASE_URL = 'https://kbpkol7wbc.execute-api.us-west-2.amazonaws.com/app_development';
 
@@ -20,7 +21,7 @@ export const getLitterReports = async (auth): Promise<LitterReport[]> => {
   }
 };
 
-export const createLitterReport = async (reportData: LitterReport, auth): Promise<LitterReport | null> => {
+export const createLitterReport = async (reportData: LitterReport, auth): Promise<CallResponse | null> => {
   try {
     const response = await axios.put<LitterReport>(`${BASE_URL}/litter`, reportData,
       {
@@ -28,7 +29,7 @@ export const createLitterReport = async (reportData: LitterReport, auth): Promis
           'Authorization': `Bearer ${auth.user?.id_token}`,
         },
       });
-    return response.data;
+    return response;
   } catch (error) {
     console.error('Error creating litter report:', error);
     return null;

@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "react-oidc-context";
 import { signOutRedirect } from "../utils/authUtils";
 import RecordForm from "./RecordForm";
+import MapView from "./MapView";
 
 // Infer the type of `auth` from the `useAuth` hook
 type AuthContext = ReturnType<typeof useAuth>;
@@ -20,6 +21,7 @@ const AuthenticatedView: React.FC<AuthenticatedViewProps> = ({ auth }) => {
   return (
     <div>
       <pre> Hello: {auth.user?.profile?.email ?? "Unknown"} </pre>
+      <MapView auth={auth}/>
       <RecordForm auth={auth}/>
       {/* <pre> ID Token: {auth.user?.id_token ?? "No token"} </pre>
       <pre> Access Token: {auth.user?.access_token ?? "No token"} </pre>
